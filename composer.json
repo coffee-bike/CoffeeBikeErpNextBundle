@@ -1,0 +1,29 @@
+{
+  "name": "coffeebike/erpnext-bundle",
+  "license": "GPL-3.0",
+  "type": "symfony-bundle",
+  "description": "Symfony Bundle for the ERPnext REST API",
+  "homepage": "https://coffee-bike.com",
+  "authors": [
+    {
+      "name": "Jonas Dambacher",
+      "email": "jonas.dambacher@coffee-bike.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": { "CoffeeBike\\ErpNextBundle\\": "" }
+  },
+  "require": {
+    "php": ">=7.2",
+    "symfony/framework-bundle": "~4.1",
+    "ci/restclientbundle" : "~2.0",
+    "doctrine/orm": "~2.5"
+  },
+  "require-dev": {
+  },
+  "config": {
+    "platform": {
+      "php": "7.2"
+    }
+  }
+}
