@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+        http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="coffeebike_erpnext.auth.username" />
+        <parameter key="coffeebike_erpnext.auth.password" />
+        <parameter key="coffeebike_erpnext.host" />
+    </parameters>
+
+    <services>
+        <service id="coffeebike_erpnext.authentication.authentication_manager" class="CoffeeBike\ErpNextBundle\Authentication\AuthenticationManager">
+            <argument key="$credentials" type="service" id="coffeebike_erpnext.authentication.credentials" />
+            <argument key="$host" type="string">%coffeebike_erpnext.host%</argument>
+        </service>
+
+        <service id="coffeebike_erpnext.authentication.credentials" class="CoffeeBike\ErpNextBundle\Authentication\Credentials">
+            <argument key="$username" type="string">%coffeebike_erpnext.auth.username%</argument>
+            <argument key="$password" type="string">%coffeebike_erpnext.auth.password%</argument>
+        </service>
+
+        <service id="coffeebike_erpnext.command.invalidate_session_command" class="CoffeeBike\ErpNextBundle\Command\InvalidateSessionCommand">
+            <tag name="console.command" />
+        </service>
+
+        <service id="coffeebike_erpnext.http.erpnext_http_client" class="CoffeeBike\ErpNextBundle\Http\ErpNextHttpClient">
+            <argument key="$authenticationManager" type="service" id="coffeebike_erpnext.authentication.authentication_manager" />
+            <argument key="$host" type="string">%coffeebike_erpnext.host%</argument>
+        </service>
+
+        <service id="coffeebike_erpnext.http.erpnext_manager" class="CoffeeBike\ErpNextBundle\Http\ErpNextManager">
+            <argument key="$erpHttpClient" type="service" id="coffeebike_erpnext.http.erpnext_http_client" />
+        </service>
+    </services>
+</container>

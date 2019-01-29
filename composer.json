@@ -1,29 +1,55 @@
 {
   "name": "coffeebike/erpnext-bundle",
-  "license": "GPL-3.0",
   "type": "symfony-bundle",
-  "description": "Symfony Bundle for the ERPnext REST API",
+  "description": "Symfony Bundle for the ERP REST API",
   "homepage": "https://coffee-bike.com",
+  "license": "GPL-3.0",
   "authors": [
     {
       "name": "Jonas Dambacher",
       "email": "jonas.dambacher@coffee-bike.com"
+    },
+    {
+      "name": "Felix Knopp",
+      "email": "felix.knopp@coffee-bike.com"
     }
   ],
-  "autoload": {
-    "psr-4": { "CoffeeBike\\ErpNextBundle\\": "" }
-  },
   "require": {
-    "php": ">=7.2",
-    "symfony/framework-bundle": "~4.1",
-    "ci/restclientbundle" : "~2.0",
-    "doctrine/orm": "~2.5"
+    "php": "^7.2",
+    "guzzlehttp/guzzle": "^6.3",
+    "symfony/cache": "^4.0",
+    "symfony/framework-bundle": "^4.0",
+    "symfony/property-access": "^4.0",
+    "symfony/yaml": "^4.0"
   },
   "require-dev": {
+    "symfony/phpunit-bridge": "^4.0"
   },
   "config": {
     "platform": {
-      "php": "7.2"
+      "php": "7.2.0"
+    },
+    "preferred-install": {
+      "*": "dist"
+    },
+    "sort-packages": true
+  },
+  "autoload": {
+    "psr-4": {
+      "CoffeeBike\\ErpNextBundle\\": ""
+    },
+    "exclude-from-classmap": [
+      "/Tests/"
+    ]
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "CoffeeBike\\ErpNextBundle\\Tests\\": "tests/"
     }
-  }
+  },
+  "conflict": {
+    "symfony/symfony": "<4.0"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
 }

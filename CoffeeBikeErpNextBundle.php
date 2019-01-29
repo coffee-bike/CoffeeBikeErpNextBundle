@@ -1,14 +1,12 @@
 <?php
-/**
- * @author Jonas Dambacher <jonas.dambacher@coffee-bike.com>
- *
- */
 
 namespace CoffeeBike\ErpNextBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
+/**
+ * @author Felix Knopp <felix.knopp@coffee-bike.com>
+ */
 class CoffeeBikeErpNextBundle extends Bundle
 {
-
 }
