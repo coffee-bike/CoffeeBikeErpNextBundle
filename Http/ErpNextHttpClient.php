@@ -7,11 +7,15 @@ use CoffeeBike\ErpNextBundle\Exception\AuthenticationException;
 use CoffeeBike\ErpNextBundle\Exception\BadRequestException;
 use CoffeeBike\ErpNextBundle\Exception\ObjectNotFoundException;
 use CoffeeBike\ErpNextBundle\Object\AbstractObject;
+use CoffeeBike\ErpNextBundle\Object\Item;
 use GuzzleHttp\Client;
 use GuzzleHttp\Cookie\CookieJar;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\RequestOptions;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
 
 /**
  * @author Felix Knopp <felix.knopp@coffee-bike.com>

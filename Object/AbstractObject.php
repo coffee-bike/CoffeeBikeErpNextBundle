@@ -2,17 +2,16 @@
 
 namespace CoffeeBike\ErpNextBundle\Object;
 
+use CoffeeBike\ErpNextBundle\Object\Fields\NameTrait;
+
 /**
  * @author Felix Knopp <felix.knopp@coffee-bike.com>
  */
 abstract class AbstractObject
 {
-    const WRITE_PROTECTED_FIELDS = [];
+    use NameTrait;
 
-    /**
-     * @var string|null
-     */
-    protected $name;
+    const WRITE_PROTECTED_FIELDS = [];
 
     /**
      * @var array
@@ -32,6 +31,8 @@ abstract class AbstractObject
         $this->name = $name;
         $this->unmappedFields = [];
     }
+
+    abstract public function getSubObjectClass(string $property);
 
     /**
      * @return string
@@ -63,6 +64,16 @@ abstract class AbstractObject
                 }
             }
 
+            if (is_array($value) && $property != 'unmappedFields') {
+                $subObjects = [];
+                /** @var AbstractObject $object */
+                foreach ($value as $object) {
+                    $subObjects[] = $object->toArray($object->getWriteProtectedFields());
+                }
+
+                $value = $subObjects;
+            }
+
             if ('unmappedFields' === $property) {
                 foreach ($value as $unmappedProperty => $unmappedValue) {
                     if (true === in_array($unmappedProperty, $writeProtectedFields)) {
@@ -83,23 +94,7 @@ abstract class AbstractObject
 
         unset($array['originalState']);
 
-        return ['data' => $array];
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getName(): ?string
-    {
-        return $this->name;
-    }
-
-    /**
-     * @param string|null $name
-     */
-    public function setName(?string $name): void
-    {
-        $this->name = $name;
+        return $array;
     }
 
     /**
@@ -148,7 +143,7 @@ abstract class AbstractObject
     /**
      * @return AbstractObject
      */
-    public function getOriginalState(): AbstractObject
+    public function getOriginalState(): ?AbstractObject
     {
         return $this->originalState;
     }

@@ -18,16 +18,22 @@ trait AbstractObjectMapperTrait
     private function mapToObject(\stdClass $data, AbstractObject $object): void
     {
         $propertyAccessor = PropertyAccess::createPropertyAccessor();
-        $originalState = clone $object;
+
 
         $unmappedFields = [];
         foreach ($data as $property => $value) {
             if (true === property_exists($object, $property)) {
+                $subObjectClass = $object->getSubObjectClass($property);
+                if ($subObjectClass != null) {
+                    $subObject = new $subObjectClass;
+                    self::mapToObject((object) $value, $subObject);
+                }
                 $propertyAccessor->setValue($object, $property, $value);
             } else {
                 $unmappedFields[$property] = $value;
             }
         }
+        $originalState = clone $object;
 
         $propertyAccessor->setValue($object, 'unmappedFields', $unmappedFields);
         $propertyAccessor->setValue($originalState, 'unmappedFields', $unmappedFields);

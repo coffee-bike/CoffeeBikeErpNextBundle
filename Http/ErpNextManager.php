@@ -37,6 +37,8 @@ class ErpNextManager
     public function create(AbstractObject $object)
     {
         $response = $this->erpNextHttpClient->request(Request::METHOD_POST, $object);
+
+        return $response;
     }
 
     /**
