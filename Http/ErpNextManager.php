@@ -5,7 +5,6 @@ namespace CoffeeBike\ErpNextBundle\Http;
 use CoffeeBike\ErpNextBundle\Exception\LastPageReachedException;
 use CoffeeBike\ErpNextBundle\Object\AbstractObject;
 use CoffeeBike\ErpNextBundle\Object\AbstractObjectMapperTrait;
-use CoffeeBike\ErpNextBundle\Object\User;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -55,6 +54,8 @@ class ErpNextManager
      * Populates the given AbstractObject.
      *
      * @param AbstractObject $object
+     * @param array|null     $filters
+     *
      */
     public function find(AbstractObject $object): void
     {
@@ -70,9 +71,9 @@ class ErpNextManager
      *
      * @return AbstractObject[]
      */
-    public function findCollection(AbstractObject $object, int $fetch = ErpNextManager::FETCH_NONE): array
+    public function findCollection(AbstractObject $object, array $filters = null, int $fetch = ErpNextManager::FETCH_NONE): array
     {
-        $collection = $this->erpNextHttpClient->request(Request::METHOD_GET, $object);
+        $collection = $this->erpNextHttpClient->request(Request::METHOD_GET, $object, $filters);
 
         $className = get_class($object);
         $objects =  [];

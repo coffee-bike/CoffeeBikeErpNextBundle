@@ -2,7 +2,7 @@
 
 namespace CoffeeBike\ErpNextBundle\Exception;
 
-use CoffeeBike\SalesforceBundle\Object\AbstractObject;
+use CoffeeBike\ErpNextBundle\Object\AbstractObject;
 
 /**
  * @author Felix Knopp <felix.knopp@coffee-bike.com>
@@ -17,7 +17,7 @@ class ObjectNotFoundException extends ErpNextException
     public static function fromAbstractObject(AbstractObject $object): self
     {
         return new static(
-            sprintf('The requested object "%s" with the id "%s" does not exist.', $object->getObjectName(), $object->getId()),
+            sprintf('The requested object "%s" with the id "%s" does not exist.', $object->getResourceName(), $object->getName()),
             404
         );
     }

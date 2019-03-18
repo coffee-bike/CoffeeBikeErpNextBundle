@@ -33,5 +33,10 @@
         <service id="coffeebike_erpnext.http.erpnext_manager" class="CoffeeBike\ErpNextBundle\Http\ErpNextManager">
             <argument key="$erpHttpClient" type="service" id="coffeebike_erpnext.http.erpnext_http_client" />
         </service>
+
+        <service id="coffeebike_erpnext.service.customer_service" class="CoffeeBike\ErpNextBundle\Service\CustomerService" >
+            <argument id="coffeebike_erpnext.http.erpnext_manager" type="service"/>
+        </service>
+
     </services>
 </container>

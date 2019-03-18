@@ -11,28 +11,17 @@
 namespace CoffeeBike\ErpNextBundle\Object;
 
 
+use CoffeeBike\ErpNextBundle\Object\Fields\ConversionFactorTrait;
 use CoffeeBike\ErpNextBundle\Object\Fields\ItemCodeTrait;
-use CoffeeBike\ErpNextBundle\Object\Fields\ItemDefaultsTrait;
-use CoffeeBike\ErpNextBundle\Object\Fields\ItemGroupTrait;
-use CoffeeBike\ErpNextBundle\Object\Fields\ItemNameTrait;
-use CoffeeBike\ErpNextBundle\Object\Fields\ProductTypeTrait;
+use CoffeeBike\ErpNextBundle\Object\Fields\QuantityTrait;
+use CoffeeBike\ErpNextBundle\Object\Fields\RateTrait;
 
-class Item extends AbstractObject
+class OrderItem extends AbstractObject
 {
-    /*
-     * Constants
-     */
-    const GOOD = 'Good';
-    const SERVICE = 'Service';
-
-    /*
-     * Traits
-     */
-    use ItemNameTrait;
+    use ConversionFactorTrait;
     use ItemCodeTrait;
-    use ItemGroupTrait;
-    use ItemDefaultsTrait;
-    use ProductTypeTrait;
+    use QuantityTrait;
+    use RateTrait;
 
     public function getSubObjectClass(string $property)
     {
@@ -45,7 +34,7 @@ class Item extends AbstractObject
     public function getResourceName(): string
     {
         // TODO: Implement getResourceName() method.
-        return 'Item';
+        return 'Sales Order Item';
     }
 
     /**

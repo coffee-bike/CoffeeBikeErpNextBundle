@@ -7,7 +7,7 @@ use CoffeeBike\ErpNextBundle\Exception\AuthenticationException;
 use CoffeeBike\ErpNextBundle\Exception\BadRequestException;
 use CoffeeBike\ErpNextBundle\Exception\ObjectNotFoundException;
 use CoffeeBike\ErpNextBundle\Object\AbstractObject;
-use CoffeeBike\ErpNextBundle\Object\Item;
+use CoffeeBike\ErpNextBundle\Object\OrderItem;
 use GuzzleHttp\Client;
 use GuzzleHttp\Cookie\CookieJar;
 use GuzzleHttp\Exception\ClientException;
@@ -56,13 +56,17 @@ class ErpNextHttpClient
      *
      * @throws AuthenticationException
      */
-    public function request(string $method, AbstractObject $object)
+    public function request(string $method, AbstractObject $object, array $filters = null)
     {
         $session = $this->authenticationManager->authenticate();
         $url = sprintf('%s/api/resource/%s', $this->host, $object->getResourceName());
 
         if (null !== $object->getName() && Request::METHOD_GET === $method) {
             $url = sprintf('%s/%s', $url, $object->getName());
+        }
+
+        if (isset($filters) && Request::METHOD_GET === $method) {
+            $url = sprintf('%s?filters=%s', $url, json_encode($this->filtersToArray($filters)));
         }
 
         $options = [
@@ -79,6 +83,8 @@ class ErpNextHttpClient
             $options[RequestOptions::JSON] = $object->toArray($object->getWriteProtectedFields());
         }
 
+        dump(json_encode($object->toArray($object->getWriteProtectedFields())));
+
         try {
             return json_decode($this->httpClient->request($method, $url, $options)->getBody()->getContents())->data;
         } catch (ClientException $exception) {
@@ -88,5 +94,22 @@ class ErpNextHttpClient
                 default: throw $exception;
             }
         }
+    }
+
+    /**
+     * @param array $filters
+     *
+     * @return array
+     */
+    public function filtersToArray(array $filters)
+    {
+        $filtersArray = [];
+
+        /** @var Filter $filter */
+        foreach ($filters as $filter) {
+            $filtersArray[] = $filter->toArray();
+        }
+
+        return $filtersArray;
     }
 }

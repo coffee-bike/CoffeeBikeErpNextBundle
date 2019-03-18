@@ -89,7 +89,7 @@ class Order extends AbstractObject
     {
         // TODO: Implement getSubObjects() method.
         if ($property == 'items') {
-            return Item::class;
+            return OrderItem::class;
         }
     }
 

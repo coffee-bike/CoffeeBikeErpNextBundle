@@ -2,8 +2,8 @@
 /**
  * Created by:
  * User: dambacher
- * Date: 2019-01-30
- * Time: 14:05
+ * Date: 2019-02-01
+ * Time: 14:54
  *
  * @author Jonas Dambacher <jonas.dambacher@coffee-bike.com>
  */
@@ -11,27 +11,27 @@
 namespace CoffeeBike\ErpNextBundle\Object\Fields;
 
 
-trait NameTrait
+trait ItemNameTrait
 {
     /**
      * @var string
      */
-    protected $name;
+    protected $item_name;
 
     /**
      * @return string
      */
-    public function getName(): ?string
+    public function getItemName(): string
     {
-        return $this->name;
+        return $this->item_name;
     }
 
     /**
-     * @param string $name
+     * @param string $item_name
      */
-    public function setName(string $name): void
+    public function setItemName(string $item_name): void
     {
-        $this->name = $name;
+        $this->item_name = $item_name;
     }
 
 }

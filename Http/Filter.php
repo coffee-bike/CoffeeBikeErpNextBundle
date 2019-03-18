@@ -10,6 +10,11 @@ class Filter
     /**
      * @var string
      */
+    private $resourceName;
+
+    /**
+     * @var string
+     */
     private $field;
 
     /**
@@ -27,12 +32,22 @@ class Filter
      * @param string $operator
      * @param string $value
      */
-    public function __construct(string $field, string $operator, string $value)
+    public function __construct(string $resourceName, string $field, string $operator, string $value)
     {
+        $this->resourceName = $resourceName;
         $this->field = $field;
         $this->operator = $operator;
         $this->value = $value;
     }
+
+    /**
+     * @return string
+     */
+    public function getResourceName(): string
+    {
+        return $this->resourceName;
+    }
+
 
     /**
      * @return string
@@ -78,5 +93,16 @@ class Filter
     public static function notEquals(string $field, string $value): self
     {
         return new static($field, '!=', $value);
+    }
+
+    public function toArray(): array
+    {
+        return array(
+            $this->resourceName,
+            $this->field,
+            $this->operator,
+            $this->value,
+        );
+        //return sprintf("'%s','%s','%s','%s'", $this->resourceName, $this->field, $this->operator, $this->value);
     }
 }

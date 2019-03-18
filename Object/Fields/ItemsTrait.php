@@ -11,7 +11,7 @@
 namespace CoffeeBike\ErpNextBundle\Object\Fields;
 
 
-use CoffeeBike\ErpNextBundle\Object\Item;
+use CoffeeBike\ErpNextBundle\Object\OrderItem;
 
 trait ItemsTrait
 {
@@ -29,11 +29,19 @@ trait ItemsTrait
     }
 
     /**
-     * @param Item $item
+     * @param OrderItem $item
      */
     public function setItems(array $items): void
     {
         $this->items = $items;
+    }
+
+    /**
+     * @param OrderItem $item
+     */
+    public function addItem(OrderItem $item): void
+    {
+        $this->items[] = $item;
     }
 
 }

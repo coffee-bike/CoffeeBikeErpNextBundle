@@ -64,7 +64,7 @@ abstract class AbstractObject
                 }
             }
 
-            if (is_array($value) && $property != 'unmappedFields') {
+            if (is_array($value) && $property != 'unmappedFields' && $property != 'item_defaults') {
                 $subObjects = [];
                 /** @var AbstractObject $object */
                 foreach ($value as $object) {
@@ -74,19 +74,25 @@ abstract class AbstractObject
                 $value = $subObjects;
             }
 
-            if ('unmappedFields' === $property) {
-                foreach ($value as $unmappedProperty => $unmappedValue) {
-                    if (true === in_array($unmappedProperty, $writeProtectedFields)) {
-                        continue;
-                    }
-
-                    $originalUnmappedStateProperty = $this->originalState->getUnmappedField($unmappedProperty);
-                    if ($unmappedValue === $originalUnmappedStateProperty) {
-                        continue;
-                    }
-
-                    $array[$unmappedProperty] = $unmappedValue;
+            /*if ('item_defaults' === $property) {
+                foreach ($value as $defaultProperty => $defaultValue) {
+                    $array[$property][] = $unmappedValue;
                 }
+            }*/
+
+            if ('unmappedFields' === $property) {
+                    foreach ($value as $unmappedProperty => $unmappedValue) {
+                        if (true === in_array($unmappedProperty, $writeProtectedFields)) {
+                            continue;
+                        }
+
+                        $originalUnmappedStateProperty = $this->originalState->getUnmappedField($unmappedProperty);
+                        if ($unmappedValue === $originalUnmappedStateProperty) {
+                            continue;
+                        }
+
+                        $array[$unmappedProperty] = $unmappedValue;
+                    }
             } else {
                 $array[$property] = $value;
             }

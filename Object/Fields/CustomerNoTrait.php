@@ -2,8 +2,8 @@
 /**
  * Created by:
  * User: dambacher
- * Date: 2019-01-30
- * Time: 14:05
+ * Date: 2019-02-01
+ * Time: 14:14
  *
  * @author Jonas Dambacher <jonas.dambacher@coffee-bike.com>
  */
@@ -11,27 +11,27 @@
 namespace CoffeeBike\ErpNextBundle\Object\Fields;
 
 
-trait NameTrait
+trait CustomerNoTrait
 {
     /**
      * @var string
      */
-    protected $name;
+    protected $kunde_nr;
 
     /**
      * @return string
      */
-    public function getName(): ?string
+    public function getKundeNr(): string
     {
-        return $this->name;
+        return $this->kunde_nr;
     }
 
     /**
-     * @param string $name
+     * @param string $kunde_nr
      */
-    public function setName(string $name): void
+    public function setKundeNr(string $kunde_nr): void
     {
-        $this->name = $name;
+        $this->kunde_nr = $kunde_nr;
     }
 
 }
