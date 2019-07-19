@@ -11,6 +11,7 @@ namespace CoffeeBike\ErpNextBundle\Object;
 
 use CoffeeBike\ErpNextBundle\Object\Fields\CustomerNameTrait;
 use CoffeeBike\ErpNextBundle\Object\Fields\CustomerNoTrait;
+use CoffeeBike\ErpNextBundle\Object\Fields\PaymentTermsTrait;
 
 
 class Customer extends AbstractObject
@@ -18,6 +19,7 @@ class Customer extends AbstractObject
 
     use CustomerNoTrait;
     use CustomerNameTrait;
+    use PaymentTermsTrait;
 
     public function getSubObjectClass(string $property)
     {

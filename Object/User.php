@@ -22,4 +22,9 @@ class User extends AbstractObject
     {
         return parent::WRITE_PROTECTED_FIELDS;
     }
+
+    public function getSubObjectClass(string $property)
+    {
+        return null;
+    }
 }

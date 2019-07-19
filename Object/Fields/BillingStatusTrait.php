@@ -43,7 +43,7 @@ trait BillingStatusTrait
      */
     public function isNotBilled(): bool
     {
-        return $this->getBillingStatus() === self::$notBilled;
+        return $this->getBillingStatus() == self::$notBilled;
     }
 
     /**
@@ -51,7 +51,7 @@ trait BillingStatusTrait
      */
     public function isFullyBilled(): bool
     {
-        return $this->getBillingStatus() === self::$fullyBilled;
+        return $this->getBillingStatus() == self::$fullyBilled;
     }
 
     /**
@@ -59,7 +59,7 @@ trait BillingStatusTrait
      */
     public function isPartlyBilled(): bool
     {
-        return $this->getBillingStatus() === self::$partlyBilled;
+        return $this->getBillingStatus() == self::$partlyBilled;
     }
 
     /**
@@ -67,7 +67,7 @@ trait BillingStatusTrait
      */
     public function isBillingClosed(): bool
     {
-        return $this->getBillingStatus() === self::isBillingClosed();
+        return $this->getBillingStatus() == self::isBillingClosed();
     }
 
 }

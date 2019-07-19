@@ -13,6 +13,9 @@ namespace CoffeeBike\ErpNextBundle\Object\Fields;
 
 trait ProductTypeTrait
 {
+    static $good = 'Good';
+    static $service = 'Service';
+
     /**
      * @var string
      */

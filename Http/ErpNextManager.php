@@ -54,7 +54,6 @@ class ErpNextManager
      * Populates the given AbstractObject.
      *
      * @param AbstractObject $object
-     * @param array|null     $filters
      *
      */
     public function find(AbstractObject $object): void

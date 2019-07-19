@@ -29,7 +29,7 @@ trait ItemsTrait
     }
 
     /**
-     * @param OrderItem $item
+     * @param array $items
      */
     public function setItems(array $items): void
     {

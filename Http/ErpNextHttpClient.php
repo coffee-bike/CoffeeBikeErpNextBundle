@@ -82,9 +82,7 @@ class ErpNextHttpClient
             $options[RequestOptions::HEADERS]['Content-Type'] = 'application/json';
             $options[RequestOptions::JSON] = $object->toArray($object->getWriteProtectedFields());
         }
-
         dump(json_encode($object->toArray($object->getWriteProtectedFields())));
-
         try {
             return json_decode($this->httpClient->request($method, $url, $options)->getBody()->getContents())->data;
         } catch (ClientException $exception) {

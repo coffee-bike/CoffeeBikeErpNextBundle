@@ -27,7 +27,7 @@ trait ApplyDiscountOnTrait
     }
 
     /**
-     * @param mixed $apply_discount_on
+     * @param string $apply_discount_on
      */
     public function setApplyDiscountOn(string $apply_discount_on): void
     {

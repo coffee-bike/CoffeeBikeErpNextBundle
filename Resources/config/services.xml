@@ -38,5 +38,8 @@
             <argument id="coffeebike_erpnext.http.erpnext_manager" type="service"/>
         </service>
 
+        <service id="coffeebike_erpnext.service.customs_tariff_no_service" class="CoffeeBike\ErpNextBundle\Service\CustomsTariffNoService" >
+        </service>
+
     </services>
 </container>

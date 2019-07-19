@@ -12,10 +12,10 @@ trait AbstractObjectMapperTrait
     /**
      * Compares the plain object and populates the AbstractObject.
      *
-     * @param \stdClass      $data
+     * @param \stdClass|array      $data
      * @param AbstractObject $object
      */
-    private function mapToObject(\stdClass $data, AbstractObject $object): void
+    private function mapToObject($data, AbstractObject $object): void
     {
         $propertyAccessor = PropertyAccess::createPropertyAccessor();
 
